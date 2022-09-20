@@ -10,6 +10,7 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,6 +44,9 @@ public class Item {
 
     @Column(name = "active_state",columnDefinition = "TINYINT default 1" )
     private boolean activeState;
+
+    @OneToMany(mappedBy = "items")
+    private Set<OrderDetails> orderDetails;
 
 
 }

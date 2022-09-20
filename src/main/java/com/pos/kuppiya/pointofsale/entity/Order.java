@@ -9,6 +9,8 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,5 +30,18 @@ public class Order {
     @JoinColumn(name = "customer_id",nullable = false)
     private Customer customer;
 
+    @Column(name = "order_date", columnDefinition = "DATETIME")
+    private Date date;
 
+    @Column(name = "total", nullable = false)
+    private double total;
+
+    @OneToMany(mappedBy = "orders")
+    private Set<OrderDetails> orderDetails;
+
+    public Order(Customer customer, Date date, double total) {
+        this.customer = customer;
+        this.date = date;
+        this.total = total;
+    }
 }
